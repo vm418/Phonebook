@@ -1,6 +1,7 @@
 const { response, request } = require('express')
 const express = require('express')
 const app = express()
+const path = require('path'); // Import the path module
 
 const morgan = require('morgan')
 morgan.token('post-data', (req, res) => {
@@ -15,6 +16,8 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :p
 const cors = require('cors')
 
 app.use(cors())
+
+app.use(express.static('build'))
 
 
 
@@ -44,6 +47,11 @@ let phonebook = [
       "number": "39-23-6423122"
     }
 ]
+
+
+
+
+
 
 app.get('/api/persons',(request,response) => {
     response.json(phonebook)
